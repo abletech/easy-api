@@ -7,7 +7,7 @@
 
 require 'rubygems'
 require 'bundler'
-
+require 'pry'
 require 'easy/api'
 
 RSpec.configure do |config|

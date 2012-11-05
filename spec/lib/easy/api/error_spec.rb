@@ -2,27 +2,24 @@ require 'spec_helper'
 
 describe Easy::Api::Error do
   describe ".new" do
-    subject { Easy::Api::Error.new(code, message) }
+    subject { Easy::Api::Error.new(:invalid, message) }
 
     context "when a message is passed in" do
-      let(:code) { 400 }
       let(:message) { "Hello, world!" }
       its(:message) { should == message }
     end
 
     context "when no message is passed in" do
-      let(:code) { 400 }
       let(:message) { nil }
-      its(:message) { should == Easy::Api::Error::MESSAGES[code] }
+      its(:message) { should == Easy::Api::Error::MESSAGES[:invalid] }
     end
   end
 
   describe "#as_json" do
-    subject { Easy::Api::Error.new(code, msg).as_json }
-    let(:code) { 500 }
+    subject { Easy::Api::Error.new(:unexpected, msg).as_json }
     let(:msg) { 'uh, oh' }
 
-    its([:code]) { should == code }
+    its([:code]) { should == Easy::Api::Error::CODES[:unexpected] }
     its([:message]) { should == msg }
   end
 end
