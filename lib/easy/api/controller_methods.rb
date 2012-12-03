@@ -5,7 +5,8 @@ module Easy::Api::ControllerMethods
     def render_format
       respond_to do |format|
         format.html { render :status => @result.status_code }
-        format.json { render :json => @result, :status => @result.status_code }
+        format.xml  { render :xml => @result.to_xml(:root => 'response', :skip_types => true), :status => @result.status_code }
+        format.json { render :json => @result, :status => (params[:callback].present? ? 200 : @result.status_code), :callback => params[:callback] }
       end
     end
 

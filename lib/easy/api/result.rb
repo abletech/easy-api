@@ -34,6 +34,20 @@ module Easy::Api
     # Will always contain 'success', the error if there is one, and any dynamic attributes.
     # @return [Hash]
     def as_json(options={})
+      convert_to_hash
+    end
+
+    # Used by Rails to parse the result as xml
+    #
+    # Will always contain 'success', the error if there is one, and any dynamic attributes.
+    # @return [Hash]
+    def to_xml(options={})
+      convert_to_hash.to_xml(options)
+    end
+
+    private
+
+    def convert_to_hash
       hash = marshal_dump.merge(success: success)
       hash[:error] = error unless error.nil?
       hash

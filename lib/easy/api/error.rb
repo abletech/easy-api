@@ -3,27 +3,31 @@ module Easy::Api
   class Error
     attr_reader :code, :message
 
-    CODES = {
-      invalid: 400,
-      unauthorized: 401,
-      not_found: 404,
-      unexpected: 500
-    }
+    def self.codes
+      {
+        invalid: 400,
+        unauthorized: 401,
+        not_found: 404,
+        unexpected: 500
+      }
+    end
 
-    MESSAGES = {
-      invalid: "Invalid request",
-      unauthorized: "This request requires a valid Private API Key",
-      not_found: "Resource not found",
-      unexpected: 'Sorry! An exception has occured. Please try again later',
-    }
+    def self.messages
+      {
+        invalid: "Invalid request",
+        unauthorized: "This request requires a valid Private API Key",
+        not_found: "Resource not found",
+        unexpected: 'Sorry! An exception has occured. Please try again later',
+      }
+    end
 
     # Initializes a new error based on the type, with an optional custom message
     #
     # @param [Symbol] type can be :invalid, :unauthorized, :not_found, or :unexpected
     # @param [optional, String] msg a custom error message (see MESSAGES for default message values)
     def initialize(type, msg=nil)
-      @code = CODES[type]
-      @message = msg || MESSAGES[type]
+      @code = self.class.codes[type]
+      @message = msg || self.class.messages[type]
     end
 
     # Returns the error as a hash
@@ -38,6 +42,13 @@ module Easy::Api
     # @return [Hash] a hash containing the error code and message
     def as_json(options={})
       to_hash
+    end
+
+    # Used by Rails to parse the error as xml
+    #
+    # @return [Hash] a hash containing the error code and message
+    def to_xml(options={})
+      to_hash.to_xml(options)
     end
   end
 end

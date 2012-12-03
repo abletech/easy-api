@@ -11,7 +11,7 @@ describe Easy::Api::Error do
 
     context "when no message is passed in" do
       let(:message) { nil }
-      its(:message) { should == Easy::Api::Error::MESSAGES[:invalid] }
+      its(:message) { should == Easy::Api::Error.messages[:invalid] }
     end
   end
 
@@ -19,7 +19,7 @@ describe Easy::Api::Error do
     subject { Easy::Api::Error.new(:unexpected, msg).as_json }
     let(:msg) { 'uh, oh' }
 
-    its([:code]) { should == Easy::Api::Error::CODES[:unexpected] }
+    its([:code]) { should == Easy::Api::Error.codes[:unexpected] }
     its([:message]) { should == msg }
   end
 end
