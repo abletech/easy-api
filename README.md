@@ -42,7 +42,7 @@ Add the following line to all Api Controllers:
 then in your Api actions, add values to the @result (Easy::Api::Result) object. 
 If the request is a success, you must set 
 
-     @result.status_code = true
+     @result.status_code = 200
      @result.success = true
 
 and you can also set any other values you want to send back, e.g.
