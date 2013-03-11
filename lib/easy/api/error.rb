@@ -5,19 +5,19 @@ module Easy::Api
 
     def self.codes
       {
-        invalid: 400,
-        unauthorized: 401,
-        not_found: 404,
-        unexpected: 500
+        :invalid      => 400,
+        :unauthorized => 401,
+        :not_found    => 404,
+        :unexpected   => 500
       }
     end
 
     def self.messages
       {
-        invalid: "Invalid request",
-        unauthorized: "This request requires a valid Private API Key",
-        not_found: "Resource not found",
-        unexpected: 'Sorry! An exception has occured. Please try again later',
+        :invalid      => "Invalid request",
+        :unauthorized => "This request requires a valid Private API Key",
+        :not_found    => "Resource not found",
+        :unexpected   => 'Sorry! An exception has occured. Please try again later',
       }
     end
 

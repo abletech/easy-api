@@ -48,7 +48,7 @@ module Easy::Api
     private
 
     def convert_to_hash
-      hash = marshal_dump.merge(success: success)
+      hash = marshal_dump.merge(:success => success)
       hash[:error] = error unless error.nil?
       hash
     end
