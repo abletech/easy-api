@@ -15,9 +15,9 @@ module Easy::Api
     def self.messages
       {
         :invalid      => "Invalid request",
-        :unauthorized => "This request requires a valid Private API Key",
+        :unauthorized => "Unauthorized request",
         :not_found    => "Resource not found",
-        :unexpected   => 'Sorry! An exception has occured. Please try again later',
+        :unexpected   => 'Sorry! An exception has occurred',
       }
     end
 
