@@ -4,9 +4,25 @@ module Easy::Api::ControllerMethods
     # Renders the Easy::Api::Result object in either json or html format (can be extended to include other formats)
     def render_format
       respond_to do |format|
-        format.html { render :status => @result.status_code }
-        format.xml  { render :xml => @result.to_xml(:root => 'response', :skip_types => true), :status => @result.status_code }
-        format.json { render :json => @result, :status => (params[:callback].present? ? 200 : @result.status_code), :callback => params[:callback] }
+        format.html do
+          render :status => @result.status_code
+        end
+
+        format.xml do
+          render :xml => @result.to_xml(:root => 'response', :skip_types => true), :status => @result.status_code
+        end
+
+        format.json do
+          if params[:callback].present?
+            status = 200
+            content_type = 'application/javascript'
+          else
+            status = @result.status_code
+            content_type = 'application/json'
+          end
+
+          render :json => @result, :status => status, :callback => params[:callback], :content_type => content_type
+        end
       end
     end
 
