@@ -6,9 +6,11 @@ class UsersController < TestController
   include Easy::Api::ControllerMethods
 
   def index
-    easy_api.users = [User.new("bob", 25), User.new('sally',40)]
-    easy_api.success = true
-    easy_api.status_code = 200
-    render_result
+    easy_api do |api|
+      api.users = [User.new("bob", 25), User.new('sally',40)]
+      api.success = true
+      api.status_code = 200
+      api.render_result(format: params[:format], callback: params[:callback])
+    end
   end
 end

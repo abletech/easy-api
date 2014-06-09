@@ -6,8 +6,14 @@ class User
     @age = age
   end
 
-  def to_xml
-    "<?xml version=\"1.0\" encoding=\"UTF-8\"?><user><id type=\"integer\">1</id><name>#{@name}</name><age type=\"integer\">#{age}</age></user>"
+  def to_xml(options = {})
+    require 'builder'
+    options[:indent] ||= 2
+    xml = options[:builder] ||= ::Builder::XmlMarkup.new(indent: options[:indent])
+    xml.instruct! unless options[:skip_instruct]
+    xml.user do
+      xml.tag!(:name, name)
+      xml.tag!(:age, age)
+    end
   end
-
 end
