@@ -13,4 +13,11 @@ class UsersController < TestController
       api.render_result(format: params[:format], callback: params[:callback])
     end
   end
+
+  def show
+    @result.user = User.new("bob", 25)
+    @result.success = true
+    @result.status_code = 200
+    render_format
+  end
 end
