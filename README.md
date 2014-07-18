@@ -34,7 +34,50 @@ If you want to override the default error message, pass in a custom message, e.g
  
 Easy::Api::Error objects have a code (e.g. 404) and a message (e.g. 'Resource not found')
 
+### Using Easy::Api
+
+Add the following line to all Api Controllers:
+  
+    include Easy::Api
+
+Then in your Api actions, do your logic inside a block:
+
+     easy_api do |api|
+        api.parcel = Parcel.first
+        api.status_code = 200
+        api.success = true
+        api.render_result(format: params[:format])
+     end
+
+If the request is a success, you must set 
+
+     api.status_code = 200
+     api.success = true
+
+and you can also set any other values you want to send back, e.g.
+
+    api.parcel = Parcel.first
+
+If the request is unsuccessful, you must set the status_code, e.g.
+
+    api.status_code = 401
+
+and you also need to set error to be an instance of Easy::Api::Error, e.g.
+
+    api.error = Easy::Api::Error.new(:unauthorized)
+
+Then render the result
+
+     api.render_result(format: params[:format])
+
+If your API supports callbacks these can also be passed
+
+     api.render_result(format: params[:format], callback: params[:callback])
+
 ### Using Easy::Api::ControllerMethods
+
+**Depricated**
+
 Add the following line to all Api Controllers:
   
     include Easy::Api::ControllerMethods
@@ -56,6 +99,10 @@ If the request is unsuccessful, you must set the status_code, e.g.
 and you also need to set error to be an instance of Easy::Api::Error, e.g.
 
     @result.error = Easy::Api::Error.new(:unauthorized)
+
+Then render the result
+
+    render_format    
 
 ## Contributing
 
