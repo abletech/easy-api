@@ -9,6 +9,7 @@ module Rails
       return @routes if defined?(@routes)
       @routes = ActionDispatch::Routing::RouteSet.new
       @routes.draw do
+        resources :customers
         resources :users
       end
       @routes

@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + 'easy/api/version'
 require File.dirname(__FILE__) + 'easy/api/controller_methods'
+require File.dirname(__FILE__) + 'easy/api/block_wrapper'
 require File.dirname(__FILE__) + 'easy/api/result'
 require File.dirname(__FILE__) + 'easy/api/error'
