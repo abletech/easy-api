@@ -6,20 +6,31 @@ describe Easy::Api::Error do
 
     context "when a message is passed in" do
       let(:message) { "Hello, world!" }
-      its(:message) { should == message }
+
+      it "has sets the message" do
+        expect(subject.message).to eql message
+      end
     end
 
     context "when no message is passed in" do
       let(:message) { nil }
-      its(:message) { should == Easy::Api::Error.messages[:invalid] }
+
+      it "the message is invalid" do
+        expect(subject.message).to eql Easy::Api::Error.messages[:invalid]
+      end
     end
   end
 
   describe "#as_json" do
-    subject { Easy::Api::Error.new(:unexpected, msg).as_json }
-    let(:msg) { 'uh, oh' }
+    subject { Easy::Api::Error.new(:unexpected, message).as_json }
+    let(:message) { 'uh, oh' }
 
-    its([:code]) { should == Easy::Api::Error.codes[:unexpected] }
-    its([:message]) { should == msg }
+    it "the code is returned" do
+      expect(subject[:code]).to eql Easy::Api::Error.codes[:unexpected]
+    end
+
+    it "the message is returned" do
+      expect(subject[:message]).to eql message
+    end
   end
 end
