@@ -1,5 +1,7 @@
 # Easy::Api
 
+{<img src="https://travis-ci.org/AbleTech/easy-api.png" />}[https://travis-ci.org/AbleTech/easy-api]
+
 A repository of common, reusable API code. Its purpose is to make all of Abletech's APIs respond in a consistent manner.
 
 ## Installation
@@ -31,13 +33,13 @@ To initialise an error, pass in the type you want, e.g.
 If you want to override the default error message, pass in a custom message, e.g.
 
     Easy::Api::Error.new(:invalid, @user.errors.full_messages.join(', '))
- 
+
 Easy::Api::Error objects have a code (e.g. 404) and a message (e.g. 'Resource not found')
 
 ### Using Easy::Api
 
 Add the following line to all Api Controllers:
-  
+
     include Easy::Api
 
 Then in your Api actions, do your logic inside a block:
@@ -49,7 +51,7 @@ Then in your Api actions, do your logic inside a block:
         api.render_result(format: params[:format])
      end
 
-If the request is a success, you must set 
+If the request is a success, you must set
 
      api.status_code = 200
      api.success = true
@@ -79,11 +81,11 @@ If your API supports callbacks these can also be passed
 **Depricated**
 
 Add the following line to all Api Controllers:
-  
+
     include Easy::Api::ControllerMethods
 
-then in your Api actions, add values to the @result (Easy::Api::Result) object. 
-If the request is a success, you must set 
+then in your Api actions, add values to the @result (Easy::Api::Result) object.
+If the request is a success, you must set
 
      @result.status_code = 200
      @result.success = true
@@ -102,7 +104,7 @@ and you also need to set error to be an instance of Easy::Api::Error, e.g.
 
 Then render the result
 
-    render_format    
+    render_format
 
 ## Contributing
 
