@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'activemodel', '>= 3.0.0'
   gem.add_development_dependency 'actionpack', '>= 3.0.0'
   gem.add_development_dependency 'activesupport', '>= 3.0.0'
+  gem.add_development_dependency 'multi_json', '~> 1.0'
   gem.add_development_dependency 'bundler'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec', '~> 2.14'
