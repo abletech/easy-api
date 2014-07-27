@@ -3,6 +3,7 @@ require 'fixtures/application'
 require 'fixtures/controllers'
 require 'fixtures/models'
 require 'rspec/rails'
+require 'multi_json'
 
 RSpec.describe CustomersController, :type => :controller do
 
@@ -10,7 +11,19 @@ RSpec.describe CustomersController, :type => :controller do
 
     it "gets the index in json format" do
       get :index, :format => 'json'
-      expect(response.body).to eql("{\"customers\":[{\"name\":\"fred\",\"age\":19},{\"name\":\"jackie\",\"age\":21}],\"success\":true}")
+
+      parsed_response = MultiJson.load(response.body)
+      expect(parsed_response['customers'].size).to eq(2)
+
+      customer_names = parsed_response['customers'].collect{|c| c['name']}
+      expect(customer_names).to include('fred')
+      expect(customer_names).to include('jackie')
+
+      customer_ages = parsed_response['customers'].collect{|c| c['age']}
+      expect(customer_ages).to include(19)
+      expect(customer_ages).to include(21)
+
+      expect(parsed_response['success']).to eq(true)
     end
 
     it "gets the index in xml format" do
@@ -24,7 +37,12 @@ RSpec.describe CustomersController, :type => :controller do
 
     it "gets show in json format" do
       get :show, :format => 'json', id: 1
-      expect(response.body).to eql("{\"customer\":{\"name\":\"fred\",\"age\":21},\"success\":true}")
+
+      parsed_response = MultiJson.load(response.body)
+      expect(parsed_response['customer']).to_not be(nil)
+      expect(parsed_response['customer']['name']).to eq('fred')
+      expect(parsed_response['customer']['age']).to eq(21)
+      expect(parsed_response['success']).to eq(true)
     end
 
     it "gets show in xml format" do
