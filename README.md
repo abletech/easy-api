@@ -1,6 +1,6 @@
 # Easy::Api
 
-{<img src="https://travis-ci.org/AbleTech/easy-api.png" />}[https://travis-ci.org/AbleTech/easy-api]
+[<img src="https://travis-ci.org/AbleTech/easy-api.png" />](https://travis-ci.org/AbleTech/easy-api)
 
 A repository of common, reusable API code. Its purpose is to make all of Abletech's APIs respond in a consistent manner.
 
