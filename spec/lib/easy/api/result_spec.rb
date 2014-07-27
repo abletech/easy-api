@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe Easy::Api::Result do
-  RSpec.describe "#as_json" do
+describe Easy::Api::Result do
+  describe "#as_json" do
     let(:result) { Easy::Api::Result.new }
     subject { result.as_json }
 
@@ -73,7 +73,7 @@ RSpec.describe Easy::Api::Result do
 
   end
 
-  RSpec.describe "#status_code" do
+  describe "#status_code" do
     let(:result) { Easy::Api::Result.new }
     subject { result.status_code }
 
