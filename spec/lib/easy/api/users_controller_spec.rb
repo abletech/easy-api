@@ -11,7 +11,19 @@ RSpec.describe UsersController, :type => :controller do
 
       it "gets the index in json format" do
         get :index, :format => 'json'
-        expect(response.body).to eql("{\"users\":[{\"name\":\"bob\",\"age\":25},{\"name\":\"sally\",\"age\":40}],\"success\":true}")
+
+        parsed_response = MultiJson.load(response.body)
+        expect(parsed_response['users'].size).to eq(2)
+
+        user_names = parsed_response['users'].collect{|c| c['name']}
+        expect(user_names).to include('bob')
+        expect(user_names).to include('sally')
+
+        user_ages = parsed_response['users'].collect{|c| c['age']}
+        expect(user_ages).to include(25)
+        expect(user_ages).to include(40)
+
+        expect(parsed_response['success']).to eq(true)
       end
 
       it "gets the index in xml format" do
@@ -23,7 +35,12 @@ RSpec.describe UsersController, :type => :controller do
     context 'GET #show' do
       it "gets show in json format" do
         get :show, :format => 'json', id: 1
-        expect(response.body).to eql("{\"user\":{\"name\":\"bob\",\"age\":25},\"success\":true}")
+
+        parsed_response = MultiJson.load(response.body)
+        expect(parsed_response['user']).to_not be(nil)
+        expect(parsed_response['user']['name']).to eq('bob')
+        expect(parsed_response['user']['age']).to eq(25)
+        expect(parsed_response['success']).to eq(true)
       end
 
       it "gets show in xml format" do
