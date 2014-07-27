@@ -17,7 +17,7 @@ RSpec.describe Easy::Api::Result do
       end
 
       it "is not successful" do
-        expect(subject[:success]).to be_falsey
+        expect(subject[:success]).to be(false)
       end
 
       it "has no status code" do
@@ -54,7 +54,7 @@ RSpec.describe Easy::Api::Result do
       end
 
       it "is successful" do
-        expect(subject[:success]).to be_truthy
+        expect(subject[:success]).to be(true)
       end
 
       it "has a customer key" do
