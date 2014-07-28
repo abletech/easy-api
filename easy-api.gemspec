@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Shevaun Coker", "Joseph Leniston", "Nigel Ramsay"]
   gem.email         = ["shevaun.coker@abletech.co.nz", "joseph.leniston@abletech.co.nz", "nigel.ramsay@abletech.co.nz"]
   gem.description   = %q{Enables consistent responses for API calls}
+  gem.summary       = %q{Facilitates standard success and error behaviour in API responses}
   gem.homepage      = "https://github.com/AbleTech/easy-api"
 
   gem.files         = `git ls-files`.split($/)
