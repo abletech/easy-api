@@ -4,10 +4,9 @@ require File.expand_path('../lib/easy/api/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = "easy-api"
   gem.version       = Easy::Api::VERSION
-  gem.authors       = ["Shevaun Coker", "Joseph Leniston"]
-  gem.email         = ["shevaun.coker@abletech.co.nz", "joseph.leniston@abletech.co.nz"]
-  gem.description   = %q{A repository of common, reusable API code}
-  gem.summary       = %q{Provides consistent responses for Abletech APIs}
+  gem.authors       = ["Shevaun Coker", "Joseph Leniston", "Nigel Ramsay"]
+  gem.email         = ["shevaun.coker@abletech.co.nz", "joseph.leniston@abletech.co.nz", "nigel.ramsay@abletech.co.nz"]
+  gem.description   = %q{Enables consistent responses for API calls}
   gem.homepage      = "https://github.com/AbleTech/easy-api"
 
   gem.files         = `git ls-files`.split($/)
