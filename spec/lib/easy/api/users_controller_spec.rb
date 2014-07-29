@@ -5,7 +5,7 @@ require 'fixtures/models'
 require 'rspec/rails'
 
 RSpec.describe UsersController, :type => :controller do
-  context 'depricated render_format method' do
+  context 'deprecated render_format method' do
 
     context 'GET #index' do
 
