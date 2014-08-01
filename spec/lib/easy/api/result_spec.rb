@@ -93,4 +93,38 @@ describe Easy::Api::Result do
       end
     end
   end
+
+  describe "#to_xml" do
+
+    let(:result) { Easy::Api::Result.new }
+    subject { result.to_xml }
+
+    context "when result is unsuccessful" do
+      let(:api_error) { Easy::Api::Error.new(:unauthorized) }
+
+      before do
+        result.error = api_error
+      end
+
+      it "renders the object as " do
+        expect(subject).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n  <success>false</success>\n  <error>\n    <code>401</code>\n    <message>Unauthorized request</message>\n  </error>\n</response>\n")
+      end
+
+    end
+
+    context "when result is successful" do
+
+      before do
+        result.success = true
+        result.customer =  "Bob Loblaw"
+      end
+
+      it "renders the object as " do
+       expect(subject).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n  <customer>Bob Loblaw</customer>\n  <success>true</success>\n</response>\n")
+      end
+
+    end
+
+  end
+
 end
