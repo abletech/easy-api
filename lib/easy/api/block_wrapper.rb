@@ -26,7 +26,7 @@ module Easy::Api::BlockWrapper
     def render_result(render_params)
       format = (render_params[:format] || 'json').try(:to_sym)
       formatted_result = if format == :xml
-        @result(render_params[:options])
+        @result.to_xml(render_params[:options] || {})
       else
         @result
       end
