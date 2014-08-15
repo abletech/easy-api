@@ -1,3 +1,7 @@
+# EasyAPI 0.2.2 (August 15, 2014) #
+
+* Reintroduce default formatting options when rendering xml
+
 # EasyAPI 0.2.1 (July 30, 2014) #
 
 * Auto-load without the need for a require statement
