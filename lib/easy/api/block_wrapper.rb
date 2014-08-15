@@ -25,10 +25,16 @@ module Easy::Api::BlockWrapper
     # use the controller to render the response
     def render_result(render_params)
       format = (render_params[:format] || 'json').try(:to_sym)
-      if render_params[:callback].blank?
-        @controller.render(format => @result, :status => @result.status_code)
+      formatted_result = if format == :xml
+        @result.to_xml(render_params[:options] || {})
       else
-        @controller.render(format => @result, :status => @result.status_code, :callback => render_params[:callback], :content_type => 'application/javascript')
+        @result
+      end
+
+      if render_params[:callback].blank?
+        @controller.render(format => formatted_result, :status => @result.status_code)
+      else
+        @controller.render(format => formatted_result, :status => @result.status_code, :callback => render_params[:callback], :content_type => 'application/javascript')
       end
     end
 

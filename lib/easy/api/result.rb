@@ -1,4 +1,5 @@
 require 'ostruct'
+require "active_support/core_ext/hash/conversions"
 
 module Easy::Api
   # Encapsulates the response data of an API call
@@ -42,6 +43,9 @@ module Easy::Api
     # Will always contain 'success', the error if there is one, and any dynamic attributes.
     # @return [Hash]
     def to_xml(options={})
+      options = options.dup
+      options[:root]        ||= 'response'
+      options[:skip_types]  ||= true
       convert_to_hash.to_xml(options)
     end
 

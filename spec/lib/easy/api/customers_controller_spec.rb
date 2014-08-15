@@ -28,7 +28,7 @@ RSpec.describe CustomersController, :type => :controller do
 
     it "gets the index in xml format" do
       get :index, :format => 'xml'
-      expect(response.body).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <customers type=\"array\">\n    <customer>\n      <name>fred</name>\n      <age>19</age>\n    </customer>\n    <customer>\n      <name>jackie</name>\n      <age>21</age>\n    </customer>\n  </customers>\n  <success type=\"boolean\">true</success>\n</hash>\n")
+      expect(response.body).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n  <customers>\n    <customer>\n      <name>fred</name>\n      <age>19</age>\n    </customer>\n    <customer>\n      <name>jackie</name>\n      <age>21</age>\n    </customer>\n  </customers>\n  <success>true</success>\n</response>\n")
     end
 
   end
@@ -47,7 +47,7 @@ RSpec.describe CustomersController, :type => :controller do
 
     it "gets show in xml format" do
       get :show, :format => 'xml', id: 1
-      expect(response.body).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <customer>\n    <name>fred</name>\n    <age>21</age>\n  </customer>\n  <success type=\"boolean\">true</success>\n</hash>\n")
+      expect(response.body).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<response>\n  <customer>\n    <name>fred</name>\n    <age>21</age>\n  </customer>\n  <success>true</success>\n</response>\n")
     end
 
   end
