@@ -72,6 +72,8 @@ Then render the result
 
      api.render_result(format: params[:format])
 
+### Support for JSONP
+
 If your API supports callbacks (JSONP) these can also be passed. The returned content_type header will change to `application/javascript` in this case. 
 
      api.render_result(format: params[:format], callback: params[:callback])
