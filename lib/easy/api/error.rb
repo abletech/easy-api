@@ -4,7 +4,7 @@ module Easy::Api
     attr_reader :code, :message
 
     def self.codes
-      {
+      @_codes ||= {
         :invalid      => 400,
         :unauthorized => 401,
         :not_found    => 404,
@@ -13,7 +13,7 @@ module Easy::Api
     end
 
     def self.messages
-      {
+      @_messages ||= {
         :invalid      => "Invalid request",
         :unauthorized => "Unauthorized request",
         :not_found    => "Resource not found",

@@ -36,6 +36,11 @@ If you want to override the default error message, pass in a custom message, e.g
 
 Easy::Api::Error objects have a code (e.g. 404) and a message (e.g. 'Resource not found')
 
+You can also define you own error types. Add the following to `initializers/easy_api.rb`
+
+    Easy::Api::Error.codes[:rate_limited] = 429
+    Easy::Api::Error.messages[:rate_limited] = 'Rate limited'
+
 ### Using Easy::Api
 
 Add the following line to all Api Controllers:
@@ -74,7 +79,7 @@ Then render the result
 
 ### Support for JSONP
 
-If your API supports callbacks (JSONP) these can also be passed. The returned content_type header will change to `application/javascript` in this case. 
+If your API supports callbacks (JSONP) these can also be passed. The returned content_type header will change to `application/javascript` in this case.
 
      api.render_result(format: params[:format], callback: params[:callback])
 

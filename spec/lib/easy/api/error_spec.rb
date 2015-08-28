@@ -33,4 +33,18 @@ describe Easy::Api::Error do
       expect(subject[:message]).to eql message
     end
   end
+
+  describe "#errors" do
+    it "should allow the Easy::Api:Error.codes to be altered" do
+      Easy::Api::Error.codes[:new_error] = 1010
+      expect(Easy::Api::Error.codes[:new_error]).to eq(1010)
+    end
+  end
+
+  describe "#messages" do
+    it "should allow the Easy::Api:Error.messages to be altered" do
+      Easy::Api::Error.messages[:new_error] = 'I am new'
+      expect(Easy::Api::Error.messages[:new_error]).to eq('I am new')
+    end
+  end
 end

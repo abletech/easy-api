@@ -1,3 +1,7 @@
+# EasyAPI 0.2.2 (August 28, 2015) #
+
+* Allow Easy::Api:Error.codes and Easy::Api:Error.messages to be added to
+
 # EasyAPI 0.2.1 (July 30, 2014) #
 
 * Auto-load without the need for a require statement
