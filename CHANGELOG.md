@@ -1,3 +1,7 @@
+# EasyAPI 0.2.3 (August 28, 2015) #
+
+* Allow Easy::Api:Error.codes and Easy::Api:Error.messages to be added to
+
 # EasyAPI 0.2.2 (August 15, 2014) #
 
 * Reintroduce default formatting options when rendering xml
