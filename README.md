@@ -79,13 +79,14 @@ Then render the result
 
 ### Support for ActionView templates
 
-If a template exists for an API action, it will be used.
+Use `template` as an option for render_result if you want more control over the response.
+This feature is especially handy if you want to use JBuilder DSL as an ActionView template language to format your response.
 
-For example *properties/index.json* will be rendered for the *index* action in the *PropertiesController*.
+    api.render_result(format: params[:format], template: "show")
 
-The `@result` will be available in the template and represents an instance of Easy::Api::Result.
+The `@result` variable will be available in the template and represents an instance of Easy::Api::Result.
 
-For the sake of consistency, you should make sure to explicity set success and error in your response.
+For the sake of consistency, you should make sure to explicitly set `success` and `error` in your response.
 
 Example using JBuilder DSL:
 
@@ -96,7 +97,7 @@ Example using JBuilder DSL:
 
 If your API supports callbacks (JSONP) these can also be passed. The returned content_type header will change to `application/javascript` in this case.
 
-     api.render_result(format: params[:format], callback: params[:callback])
+    api.render_result(format: params[:format], callback: params[:callback])
 
 ### Using Easy::Api::ControllerMethods
 
