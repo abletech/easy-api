@@ -1,3 +1,7 @@
+# EasyAPI 0.2.4 (September 28, 2015) #
+
+* Support for ActionView templates
+
 # EasyAPI 0.2.3 (August 28, 2015) #
 
 * Allow Easy::Api:Error.codes and Easy::Api:Error.messages to be added to
