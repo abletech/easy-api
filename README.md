@@ -49,17 +49,17 @@ Add the following line to all Api Controllers:
 
 Then in your Api actions, do your logic inside a block:
 
-     easy_api do |api|
-        api.parcel = Parcel.first
-        api.status_code = 200
-        api.success = true
-        api.render_result(format: params[:format])
-     end
+    easy_api do |api|
+      api.parcel = Parcel.first
+      api.status_code = 200
+      api.success = true
+      api.render_result(format: params[:format])
+    end
 
 If the request is a success, you must set
 
-     api.status_code = 200
-     api.success = true
+    api.status_code = 200
+    api.success = true
 
 and you can also set any other values you want to send back, e.g.
 
@@ -75,7 +75,22 @@ and you also need to set error to be an instance of Easy::Api::Error, e.g.
 
 Then render the result
 
-     api.render_result(format: params[:format])
+    api.render_result(format: params[:format])
+
+### Support for ActionView templates
+
+If a template exists for an API action, it will be used.
+
+For example *properties/index.json* will be rendered for the *index* action in the *PropertiesController*.
+
+The `@result` will be available in the template and represents an instance of Easy::Api::Result.
+
+For the sake of consistency, you should make sure to explicity set success and error in your response.
+
+Example using JBuilder DSL:
+
+    json.success @result.success
+    json.error @result.error
 
 ### Support for JSONP
 

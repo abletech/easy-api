@@ -31,10 +31,13 @@ module Easy::Api::BlockWrapper
         @result
       end
 
-      if render_params[:callback].blank?
-        @controller.render(format => formatted_result, :status => @result.status_code)
-      else
+      if render_params[:callback].present?
         @controller.render(format => formatted_result, :status => @result.status_code, :callback => render_params[:callback], :content_type => 'application/javascript')
+      elsif @controller.template_exists?("#{@controller.controller_path}/#{@controller.action_name}.#{format}")
+        @controller.instance_variable_set("@result", @result)
+        @controller.render(:status => @result.status_code)
+      else
+        @controller.render(format => formatted_result, :status => @result.status_code)
       end
     end
 
