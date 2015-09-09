@@ -40,4 +40,13 @@ class CustomersController < TestController
       api.render_result(format: params[:format], callback: params[:callback])
     end
   end
+
+  def new
+    easy_api do |api|
+      api.customer = Customer.new("fred", 21)
+      api.success = true
+      api.status_code = 200
+      api.render_result(format: params[:format], template: "new")
+    end
+  end
 end

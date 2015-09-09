@@ -33,6 +33,15 @@ RSpec.describe CustomersController, :type => :controller do
 
   end
 
+  context 'GET #new' do
+    it "gets new in json format and renders using template" do
+      get :new, :format => 'json'
+
+      json = MultiJson.load(response.body)
+      expect(json).to match /haha/
+    end
+  end
+
   context 'GET #show' do
 
     it "gets show in json format" do
