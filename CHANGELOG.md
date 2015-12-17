@@ -1,3 +1,7 @@
+# EasyAPI 0.3.0 (December 18, 2015) #
+
+* Add support for externally generated JSON and XML
+
 # EasyAPI 0.2.3 (August 28, 2015) #
 
 * Allow Easy::Api:Error.codes and Easy::Api:Error.messages to be added to

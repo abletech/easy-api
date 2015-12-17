@@ -83,9 +83,24 @@ If your API supports callbacks (JSONP) these can also be passed. The returned co
 
      api.render_result(format: params[:format], callback: params[:callback])
 
+## Support for externally generated JSON and XML
+
+Sometimes it makes sense to use your database to generate the raw JSON or XML. If
+you need to do this, you can use the raw method as shown below.
+
+    easy_api do |api|
+       api.status_code = 200
+       api.success = true
+       api.year = 2015
+       api.raw.animals = '[{"name" => "Charles Bird"}, {"name" => "Silver"}, {"name" => "Lassie"}]'
+
+       api.render_result(format: params[:format])
+    end
+
+
 ### Using Easy::Api::ControllerMethods
 
-**Depricated**
+**Deprecated**
 
 Add the following line to all Api Controllers:
 
