@@ -97,6 +97,22 @@ you need to do this, you can use the raw method as shown below.
        api.render_result(format: params[:format])
     end
 
+or support both JSON and XML:
+
+    easy_api do |api|
+       api.status_code = 200
+       api.success = true
+       api.enterprise = 'safe'
+
+       if params[:format] == 'xml'
+         api.raw.categories = '<category>Large</category><category>Medium</category><category>Small</category>'
+       else
+         api.raw.categories = '["Large", "Medium", "Small"]'
+       end
+
+       api.render_result(format: params[:format])
+    end
+
 
 ### Using Easy::Api::ControllerMethods
 
