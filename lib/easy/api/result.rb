@@ -39,14 +39,6 @@ module Easy::Api
       @raw ||= RawAttributesResult.new
     end
 
-    # # Used by Rails to render the result as json
-    # #
-    # # Will always contain 'success', the error if there is one, and any dynamic attributes.
-    # # @return [Hash]
-    # def as_json(options={})
-    #   non_raw_attributes
-    # end
-
     def to_json(options={})
       json = non_raw_attributes.to_json
 
