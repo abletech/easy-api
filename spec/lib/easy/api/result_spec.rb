@@ -78,7 +78,7 @@ describe Easy::Api::Result do
     context 'with some RAW json attributes' do
       before do
         result.success = true
-        result.raw.customer =  '{"'"name"'":"'"Geoff Flinders"'", "'"age"'":27, "'"height"'": 1.79}'
+        result.raw.customer =  '{"name":"Geoff Flinders","age":27,"height": 1.79}'
       end
 
       it "has a success key" do
