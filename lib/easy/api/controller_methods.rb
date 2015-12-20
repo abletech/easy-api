@@ -21,7 +21,7 @@ module Easy::Api::ControllerMethods
             content_type = 'application/json'
           end
 
-          render :json => @result, :status => status, :callback => params[:callback], :content_type => content_type
+          render :json => @result.to_json, :status => status, :callback => params[:callback], :content_type => content_type
         end
       end
     end

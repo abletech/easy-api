@@ -8,8 +8,13 @@ module Easy::Api
   # #status_code
   # success
   # error (see Easy::Api::Error#new)
-  class Result < OpenStruct
+  class Result
+
     attr_writer :success, :status_code, :error
+
+    def initialize
+      @native_attributes = {}
+    end
 
     # An instance of Easy::Api::Error or nil if there is no error
     # @return [Easy::Api::Error, nil]
@@ -30,12 +35,26 @@ module Easy::Api
       @status_code || raise("Easy::Api::Result needs a status_code!")
     end
 
-    # Used by Rails to render the result as json
-    #
-    # Will always contain 'success', the error if there is one, and any dynamic attributes.
-    # @return [Hash]
-    def as_json(options={})
-      convert_to_hash
+    def raw
+      @raw ||= RawAttributesResult.new
+    end
+
+    def to_json(options={})
+      json = non_raw_attributes.to_json
+
+      if raw.attributes.any?
+        json = json.chop # remove the closing '}'
+
+        raw.attributes.each_with_index do |(attr_name, raw_value), index|
+          json << ','
+
+          json << '"' << attr_name << '":' << raw_value
+        end
+
+        json << '}'
+      end
+
+      json
     end
 
     # Used by Rails to parse the result as xml
@@ -46,15 +65,58 @@ module Easy::Api
       options = options.dup
       options[:root]        ||= 'response'
       options[:skip_types]  ||= true
-      convert_to_hash.to_xml(options)
+
+      xml = non_raw_attributes.to_xml(options)
+
+      if raw.attributes.any?
+        xml.gsub!(/<\/#{options[:root]}>[\s\n]*\z/, '') # remove the closing </response>
+
+        raw.attributes.each_with_index do |(attr_name, raw_value), index|
+          xml << '<' << attr_name << '>' << raw_value << '</' << attr_name << '>'
+        end
+
+        xml << "</#{options[:root]}>"
+      end
+
+      xml
+    end
+
+    def method_missing(symbol, *args)
+      if symbol =~ /.+=/
+        attr_name = symbol.to_s[0..-2]
+        @native_attributes[attr_name] = args.first
+      else
+        super
+      end
     end
 
     private
 
-    def convert_to_hash
-      hash = marshal_dump.merge(:success => success)
-      hash[:error] = error unless error.nil?
+    def non_raw_attributes
+      hash = @native_attributes.merge('success' => success)
+
+      if error
+        hash['error'] = error.as_json
+      end
+
       hash
+    end
+  end
+
+  class RawAttributesResult
+    def initialize
+      @attributes = {}
+    end
+
+    attr_reader :attributes
+
+    def method_missing(symbol, *args)
+      if symbol =~ /.+=/
+        attr_name = symbol.to_s[0..-2]
+        @attributes[attr_name] = args.first
+      else
+        super
+      end
     end
   end
 end

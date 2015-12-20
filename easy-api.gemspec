@@ -23,4 +23,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec', '>= 2.14'
   gem.add_development_dependency 'rspec-rails'
+  gem.add_development_dependency 'guard-rspec', '~> 4.6'
 end
